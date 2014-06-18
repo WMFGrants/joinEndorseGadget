@@ -1,0 +1,127 @@
+/*  _____________________________________________________________________________
+ * |                                                                             |
+ * |                    === WARNING: GADGET FILE ===                      |
+ * |                  Changes to this page affect many users.                    |
+ * | Please discuss changes on the talk page or on [[MediaWiki_talk:Gadgets-definition]] before editing. |
+ * |_____________________________________________________________________________|
+ *
+ * "Endorse & Join" feature, to be used by the Wikimedia Foundation's Grants Programme, 
+ */
+.grantsGadget .ui-state-hover{
+	background: transparent;
+	border-color: #a1a1a1;
+}
+.grantsGadget.ui-dialog .ui-icon-closethick{
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjQsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTEuMzEzcHgiIGhlaWdodD0iMTEuMzEzcHgiIHZpZXdCb3g9IjAgMCAxMS4zMTMgMTEuMzEzIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMS4zMTMgMTEuMzEzIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwb2x5Z29uIGZpbGw9IiNCMEIxQjEiIHBvaW50cz0iMTEuMzEzLDIuMTIxIDkuMTkyLDAgNS42NTcsMy41MzUgMi4xMjIsMCAwLDIuMTIxIDMuNTM2LDUuNjU2IDAuMDAxLDkuMTkxIDIuMTIyLDExLjMxMyANCgk1LjY1Nyw3Ljc3NyA5LjE5MiwxMS4zMTIgMTEuMzEzLDkuMTkxIDcuNzc4LDUuNjU2ICIvPg0KPC9zdmc+DQo=) no-repeat 50% 50% !important;
+}
+.grantsGadget .ui-widget-content{
+	background: #EEE;
+}
+
+.grantsGadget.ui-dialog .ui-widget-header{
+	border: none;
+	background: #EEE !important;
+	padding-left: 11px !important;
+	margin-top: 25px;
+}
+.grantsGadget.ui-widget-content{
+	background: #EEE;
+	padding: 10px 35px;
+	color: #444; 
+	border-left: 1px solid #ddd; 
+	border-top: 1px solid #ddd; 
+	border-right: 1px solid #ddd; 
+	border-bottom: 3px solid #D0D0D0; 
+	border-radius: 1px;
+}
+.grantsGadget .gadgetControls{
+	text-align: right;
+	margin: 10px 0px;
+}
+/*Check*/
+.grantsGadget .messageDescription{
+	margin: 10px 0px;
+}
+.grantsGadget textarea{
+	outline: 0px;
+	padding: 14px;
+	resize: none;
+	background-color: white;
+	border: 1px solid #DDD;
+	border-radius: 1px;
+	margin-bottom: 1em;
+}
+.grantsGadget textarea:focus{
+	border-left-width: 6px;
+	border-left-color:#4091ed;
+}
+.grantsSpeechBubbleContainer{
+	position: absolute;
+	top: -50px;
+}
+.grantsSpeechBubble{
+	background: #347BFF;
+	border-radius: 3px;
+	display: inline-block;
+	padding: 10px;
+	border-bottom-color: #1059E1;
+	border-width: 0px 0px 3px 0px;
+	border-style: solid;
+	color: white;
+}
+.grantsSpeechBubbleArrowDown {
+	width: 0px; 
+	height: 0px; 
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid #347BFF;
+	position: relative;
+	top: -3px;
+	left: 10px;
+}
+.grantsHide{
+	display: none;
+}
+.messageSignature{
+	font-size: 9px;
+}
+.grantsGadget textarea::-webkit-input-placeholder{
+	font-style: italic;
+}
+.grantsGadget textarea::-moz-placeholder {  /* Firefox 19+ */
+    font-style: italic;
+}
+.grantsGadget textarea:-ms-input-placeholder {  
+	font-style: italic;
+}
+
+/* Join specific*/
+/* Dropdown styling */
+.joinGadget .chzn-container-single .chzn-single{
+	background-image: none;
+	border-radius: 1px;
+	box-shadow: none;
+	border: 1px solid #ddd;
+	padding: .25em;
+	padding-left: 14px;
+}
+.joinGadget .chzn-container .chzn-results li {
+	padding-left: 10px;
+}
+.joinGadget .chzn-container-active.chzn-with-drop .chzn-single{
+	/*Get a better color*/
+	background: #F6F3F3;
+	border: 1px solid #aaa;
+	padding: .25em;
+	padding-left: 14px;
+}
+.joinGadget .chzn-container .chzn-results .highlighted{
+	background-image: none;
+	background-color: #347bff;
+}
+.joinGadget .chzn-container-single .chzn-single div b{
+	background-position: 0px 5px;
+}
+.joinGadget .chzn-container-active.chzn-with-drop .chzn-single div b{
+	background-position: -18px 5px;
+}
