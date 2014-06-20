@@ -11,7 +11,7 @@
 //<nowiki>
 
 //The stylesheet with all the styles for the endorse & the join gadget
-importStylesheet('User:Jeph_paul/grantsGadgets.css');
+importStylesheet('MediaWiki:Gadget-addMe.css');
 /*
  * Common utilities for both the endorse & the join gadget
  */
@@ -25,8 +25,8 @@ var gadgetUtilities = function (){
 	 * The interface messages or strings are maintained in interfaceMessagesPath & config values eg, 
 	 * section-header, the section where the comments are added etc are maintained in configPath
 	 */
-	this.interfaceMessagesPath = 'User:Jeph_paul/grantGadgetsInterfaceMessages';
-	this.configPath = 'User:Jeph_paul/grantGadgetsConfig';
+	this.interfaceMessagesPath = 'Meta:AddMe/InterfaceText';
+	this.configPath = 'Meta:AddMe/Config';
 	
 	//The time taken for the page to scroll to the feedback speech bubble (milliseconds)
 	this.feedbackScrollTime = 2000;
@@ -218,7 +218,7 @@ var endorseGadget = function(){
 						$('.messageSignature').css('visibility','hidden');
 					}
 			});
-			$('#ui-dialog-title-endorseDialog').attr('localize','title');
+			$('.endorseGadget .ui-dialog-title').attr('localize','title');
 			
 			$('.endorseGadget .cancel').click(function(){
 				dialog.dialog('close');
@@ -384,7 +384,7 @@ var joinGadget = function(){
 						$('.messageSignature').css('visibility','hidden');
 					}
 			});
-			$('#ui-dialog-title-joinDialog').attr('localize','title');
+			$('.joinGadget .ui-dialog-title').attr('localize','title');
  
 			$('.joinGadget .cancel').click(function(){
 				dialog.dialog('close');
@@ -594,11 +594,6 @@ mw.loader.using( ['jquery.ui.dialog', 'mediawiki.api', 'mediawiki.ui','jquery.ch
 					var interfaceMessagesFullPath = util.interfaceMessagesPath+'/'+util.userLanguage();
 					var configFullPath = util.configPath+'/'+util.contentLanguage();
 					
-					//Checking if the user is logged in
-					if(!mw.config.get('wgUserName')){
-						util.showErrorMessage('endorseGadget','login');
-						util.showErrorMessage('joinGadget','login');	
-					}
 					/*
 					 * To detect if we have the gadget translations and config in the desired languages.
 					 * Currently page language is English always. So the config returned is in en. The InterfaceMessages is
@@ -639,6 +634,13 @@ mw.loader.using( ['jquery.ui.dialog', 'mediawiki.api', 'mediawiki.ui','jquery.ch
 													e.preventDefault();
 													endorse.Dialog();
 												});	
+							
+							//Checking if the user is logged in
+							if(!mw.config.get('wgUserName')){
+								util.showErrorMessage('endorseGadget','login');
+								util.showErrorMessage('joinGadget','login');	
+							}
+							
 							if(util.checkFeedbackCookie('endorseFeedback')){
 								util.showFeedback(endorse.config, endorse.interfaceMessages);
 							}	
