@@ -180,9 +180,11 @@ var endorseGadget = function(){
 	var createDialog = function(){
 		dialog = $( "<div id='endorseDialog'></div>" )
 				.html(
-					'<div localize="message-description" class="messageDescription">Explaining your endorsement improves process</div>' + '\
-					 <div class="error grantsHide" localize="error-save">An error occured</div>\
-					 <div class="error grantsHide" localize="error-login">An error occured</div>\
+					'<div class="mw-ui-vform">\
+					 	<div class="error grantsHide" localize="error-save">An error occured</div>\
+					 	<div class="error grantsHide" localize="error-login">An error occured</div>\
+					 </div>\
+					 <div localize="message-description" class="messageDescription">Explaining your endorsement improves process</div>' + '\
 					 <textarea rows="5" cols="10" placeholder="Add your comment" id="endorseComment" class="" localize="placeholder-comment"></textarea>\
 					 <span localize="message-signature" class="messageSignature">Your signature will be added automatically</span>\
 					 <div class="gadgetControls">\
@@ -334,12 +336,14 @@ var joinGadget = function(){
 	var createDialog = function(){
 		dialog = $( "<div id='joinDialog'></div>" )
 				.html(
-					'<select class="roleSelect" localize="placeholder-role" data-placeholder="Select a role">\
+					'<div class="mw-ui-vform">\
+					 	<div class="error grantsHide" localize="error-save">An error occured</div>\
+					 	<div class="error grantsHide" localize="error-login">An error occured</div>\
+					 </div>\
+					<select class="roleSelect" localize="placeholder-role" data-placeholder="Select a role">\
 						<option></option>\
 					</select>\
 					<div localize="message-description" class="messageDescription">Tell us how you would like to help</div>\
-					<div class="error grantsHide" localize="error-save">An error occured</div>\
-					<div class="error grantsHide" localize="error-login">You are not logged in</div>\
 					<textarea rows="5" cols="10" placeholder="Add your comment" id="joinComment" class="" localize="placeholder-comment"></textarea>\
 					<span localize="message-signature" class="messageSignature">Your signature will be added automatically</span>\
 					<div class="gadgetControls">\

@@ -79,11 +79,14 @@
 	top: -3px;
 	left: 10px;
 }
-.grantsHide{
+div.grantsHide{
 	display: none;
 }
 .messageSignature{
 	font-size: 9px;
+}
+.grantsGadget mw-ui-vform{
+	width: 100%;
 }
 .grantsGadget textarea::-webkit-input-placeholder{
 	font-style: italic;
