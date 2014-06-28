@@ -73,7 +73,7 @@ var gadgetUtilities = function (){
 	 * To detect the type of grant. IEG,PEG etc
 	 */
 	this.grantType = function(config){
-		var grant = mw.config.get('wgTitle').split('/')[0];
+		var grant = mw.config.get('wgTitle').split('/')[0].replace(/ /g,'_');
 		if (grant in config){
 			return config[grant];
 		}
@@ -588,7 +588,7 @@ mw.loader.using( ['jquery.ui.dialog', 'mediawiki.api', 'mediawiki.ui','jquery.ch
 			 * either when pages can be tagged with arbitary language or when we set langauge markers later on. 
 			 * 
 			 */
-			if (  namespace == "Grants" ) {
+			if (  namespace == "Grants" || namespace == 'Research') {
 				if(mw.config.get('wgPageContentLanguage') == 'en'){
 					
 					var endorse = new endorseGadget();		
