@@ -114,6 +114,10 @@ var gadgetUtilities = function (){
 	 */
 	this.stripWhiteSpace = function(dict){
 		for (key in dict){
+			//Temp fix for section header
+			if(key == 'section-header'){
+				dict[key] = dict[key].replace(/ /g,'_');
+			}
 			dict[key] = typeof(dict[key]) == 'object' ? that.stripWhiteSpace(dict[key]) : $.trim(dict[key]);
 		}
 		return dict;
