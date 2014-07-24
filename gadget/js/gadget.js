@@ -127,7 +127,7 @@ var gadgetUtilities = function (){
 	 * user's user page
 	 */
 	this.addToInfobox = function(username){
-		return '[[User:' + username + '|' + username + ']]';
+		return username;
 	};
 	/*
 	 * To localize the gadget's interface messages based on the user's language setting
