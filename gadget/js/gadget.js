@@ -334,6 +334,34 @@ var joinGadget = function(){
 	var api = new mw.Api();	
 	var that = this;
 	/*
+	 * A count is maintained of the open '{{' braces
+	 * when a '}}' is encountered the counter is decremented.
+	 * If the counter reaches 0 the end of the infobox has been found.
+	 * Else the syntax is broken or the end of the infobox is not in 
+	 * the first section of the page.
+	 */
+	var extractInfobox = function(markup){
+		var startIndex = markup.indexOf('{{Probox');
+		var counter = 0;
+		var endIndex = 0;
+		for (i=startIndex;i<markup.length;i++){ 
+			if(markup[i] == '}' && markup[i+1] == '}'){ 
+					counter++;
+			} 
+			if(markup[i] == '{' && markup[i+1] == '{'){
+				counter--;
+			} 
+			if(counter == 0){
+				var endIndex = i+2; 
+				break;
+			}
+		}
+		if (counter != 0){
+			return '';
+		}
+		return markup.slice(startIndex,endIndex);
+	};
+	/*
 	 * This function creates the dialog & defines
 	 *  needed interactions in the dialog.
 	 */ 
@@ -416,8 +444,8 @@ var joinGadget = function(){
 					}).then(function(result){
 							var roles = that.interfaceMessages['roles'];
 							var wikitext = result.parse.wikitext['*'];
-							var indexProboxStart = wikitext.indexOf('{{Probox');
-							var infobox = wikitext.slice(indexProboxStart,wikitext.indexOf('}}',indexProboxStart)+2);
+							
+							var infobox = extractInfobox(wikitext);
 							that.infobox = infobox;
 							units = infobox.split('\n');
 							for (unit in units){
@@ -498,7 +526,7 @@ var joinGadget = function(){
 		}
 		var modifiedInfoBox = units.join("\n");
 		if(!emptyRoleAdded){
-			var paramCount = parseInt(roleDict["volunteer"])+1;
+			var paramCount = roleDict["volunteer"] ? parseInt(roleDict["volunteer"]) + 1 : 1;
 			modifiedInfoBox = modifiedInfoBox.split('}}')[0]+'|volunteer'+paramCount+'='+util.addToInfobox(mw.config.get('wgUserName'))+'\n}}';
 		}
 		
