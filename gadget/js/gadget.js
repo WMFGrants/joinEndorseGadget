@@ -527,7 +527,8 @@ var joinGadget = function(){
 		var modifiedInfoBox = units.join("\n");
 		if(!emptyRoleAdded){
 			var paramCount = roleDict["volunteer"] ? parseInt(roleDict["volunteer"]) + 1 : 1;
-			modifiedInfoBox = modifiedInfoBox.split('}}')[0]+'|volunteer'+paramCount+'='+util.addToInfobox(mw.config.get('wgUserName'))+'\n}}';
+			var endIndex = modifiedInfoBox.lastIndexOf('}}');
+			modifiedInfoBox = modifiedInfoBox.slice(0,endIndex)+'|volunteer'+paramCount+'='+util.addToInfobox(mw.config.get('wgUserName'))+'\n}}';
 		}
 		
 		api.post({
@@ -620,7 +621,7 @@ mw.loader.using( ['jquery.ui.dialog', 'mediawiki.api', 'mediawiki.ui','jquery.ch
 			 * either when pages can be tagged with arbitary language or when we set langauge markers later on. 
 			 * 
 			 */
-			if (  namespace == "Grants" || namespace == 'Research') {
+			if (  $('.wp-join-button,.wp-endorse-button').length) {
 				if(mw.config.get('wgPageContentLanguage') == 'en'){
 					
 					var endorse = new endorseGadget();		
