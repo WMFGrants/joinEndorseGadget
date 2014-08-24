@@ -154,7 +154,7 @@ var gadgetUtilities = function (){
 	 * endorsement has been made or afetr joining a project
 	 */
 	this.showFeedback = function(config,InterfaceMessages){
-		var li = $('#'+config['section-header']).parent().next().find('li').eq(-1);
+		var li = $('#'+config['section-header']).parent().find('~ ul>li:last-child');
 		speechBubble = li.append($('<div class="grantsSpeechBubbleContainer"></div>').html('<div class="grantsSpeechBubble">\
 		<span localize="message-feedback">Thank You</span></div><div class="grantsSpeechBubbleArrowDown"></div>')).find('.grantsSpeechBubbleContainer');
 		var width = li.css('display','inline-block').width();
