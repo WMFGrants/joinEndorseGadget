@@ -116,7 +116,8 @@ var gadgetUtilities = function (){
 		for (key in dict){
 			//Temp fix for section header
 			if(key == 'section-header'){
-				dict[key] = dict[key].replace(/ /g,'_');
+				dict['section-header-read'] = dict[key].replace(/ /g,'_');
+				dict['section-header-write'] = dict[key];
 			}
 			dict[key] = typeof(dict[key]) == 'object' ? that.stripWhiteSpace(dict[key]) : $.trim(dict[key]);
 		}
@@ -151,10 +152,10 @@ var gadgetUtilities = function (){
 	};
 	/*
 	 * This function show the feedback speech bubble after an 
-	 * endorsement has been made or afetr joining a project
+	 * endorsement has been made or after joining a project
 	 */
 	this.showFeedback = function(config,InterfaceMessages){
-		var li = $('#'+config['section-header']).parent().find('~ ul>li:last-child');
+		var li = $('#'+config['section-header-read']).parent().find('~ ul>li:last-child');
 		speechBubble = li.append($('<div class="grantsSpeechBubbleContainer"></div>').html('<div class="grantsSpeechBubble">\
 		<span localize="message-feedback">Thank You</span></div><div class="grantsSpeechBubbleArrowDown"></div>')).find('.grantsSpeechBubbleContainer');
 		var width = li.css('display','inline-block').width();
@@ -260,7 +261,7 @@ var endorseGadget = function(){
 					var sectionCount = 1;
 					var sectionFound = false;
 					for (var section in sections ){
-						if ($.trim(sections[section]['anchor']) == that.config['section-header'] ){
+						if ($.trim(sections[section]['anchor']) == that.config['section-header-read'] ){
 							sectionFound = true;
 							break;
 						}
@@ -294,7 +295,7 @@ var endorseGadget = function(){
 							});
 					}
 					else{
-						var sectionHeader = that.config['section-header'];
+						var sectionHeader = that.config['section-header-write'];
 						api.post({
 							'action': 'edit',
 							'title': mw.config.get('wgPageName'),
@@ -359,7 +360,13 @@ var joinGadget = function(){
 		if (counter != 0){
 			return '';
 		}
-		return markup.slice(startIndex,endIndex);
+		var infobox = { 
+			'infobox' : markup.slice(startIndex,endIndex),
+		    'before' : markup.slice(0,startIndex),
+			'after' : markup.slice(endIndex),
+		};
+		//return markup.slice(startIndex,endIndex);
+		return infobox;
 	};
 	/*
 	 * This function creates the dialog & defines
@@ -445,8 +452,10 @@ var joinGadget = function(){
 							var roles = that.interfaceMessages['roles'];
 							var wikitext = result.parse.wikitext['*'];
 							
-							var infobox = extractInfobox(wikitext);
-							that.infobox = infobox;
+							var content = extractInfobox(wikitext);
+							var infobox = that.infobox = content['infobox'];
+							that.before = content['before'];
+							that.after = content['after'];
 							units = infobox.split('\n');
 							for (unit in units){
 								var line = units[unit];
@@ -534,7 +543,7 @@ var joinGadget = function(){
 		api.post({
 			'action' : 'edit',
 			'title' : mw.config.get('wgPageName'),
-			'text' : modifiedInfoBox,
+			'text' : that.before + modifiedInfoBox + that.after,
 			'summary' : 'Adding my name to the infobox',
 			'section': 0,
 			'watchlist':'watch',
@@ -550,7 +559,7 @@ var joinGadget = function(){
 					var sectionCount = 1;
 					var sectionFound = false;
 					for (var section in sections ){
-						if ($.trim(sections[section]['anchor']) == that.config['section-header'] ){
+						if ($.trim(sections[section]['anchor']) == that.config['section-header-read'] ){
 							sectionFound = true;
 							break;
 						}
@@ -584,7 +593,7 @@ var joinGadget = function(){
 							});
 					}
 					else{
-						var sectionHeader = that.config['section-header'];
+						var sectionHeader = that.config['section-header-write'];
 						api.post({
 							'action': 'edit',
 							'title': mw.config.get('wgPageName'),

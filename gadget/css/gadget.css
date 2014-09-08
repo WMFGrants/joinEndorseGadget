@@ -52,8 +52,7 @@
 	margin-bottom: 1em;
 }
 .grantsGadget textarea:focus{
-	border-left-width: 6px;
-	border-left-color:#4091ed;
+	box-shadow: inset .45em 0 0 #5088f7;
 }
 .grantsSpeechBubbleContainer{
 	position: absolute;
