@@ -155,7 +155,7 @@ var gadgetUtilities = function (){
 	 * endorsement has been made or after joining a project
 	 */
 	this.showFeedback = function(config,InterfaceMessages){
-		var li = $('#'+config['section-header-read']).parent().find('~ ul>li:last-child');
+		var li = $('#'+config['section-header-read']).parent().next().find('li').eq(-1);
 		speechBubble = li.append($('<div class="grantsSpeechBubbleContainer"></div>').html('<div class="grantsSpeechBubble">\
 		<span localize="message-feedback">Thank You</span></div><div class="grantsSpeechBubbleArrowDown"></div>')).find('.grantsSpeechBubbleContainer');
 		var width = li.css('display','inline-block').width();
@@ -183,14 +183,14 @@ var endorseGadget = function(){
 	 * It is also where all the dialog related interactions are defined.
 	 */ 
 	var createDialog = function(){
-		dialog = $( "<div id='endorseDialog'></div>" )
+		dialog = $( "<div id='devEndorseDialog'></div>" )
 				.html(
 					'<div class="mw-ui-vform">\
 					 	<div class="error grantsHide" localize="error-save">An error occured</div>\
 					 	<div class="error grantsHide" localize="error-login">An error occured</div>\
 					 </div>\
 					 <div localize="message-description" class="messageDescription">Explaining your endorsement improves process</div>' + '\
-					 <textarea rows="5" cols="10" placeholder="Add your comment" id="endorseComment" class="" localize="placeholder-comment"></textarea>\
+					 <textarea rows="5" cols="10" placeholder="Add your comment" id="devEndorseComment" class="" localize="placeholder-comment"></textarea>\
 					 <span localize="message-signature" class="messageSignature">Your signature will be added automatically</span>\
 					 <div class="gadgetControls">\
 						<a href="#" localize="button-cancel" class="mw-ui-button cancel mw-ui-quiet">Cancel</a>\
@@ -206,15 +206,15 @@ var endorseGadget = function(){
 				resizable: false,
 				draggable: false,
 				close: function( event, ui ) {
-					$('#endorseComment').val('');
+					$('#devEndorseComment').val('');
 				}
 			});
 
 			$('.add-endorse').click(function(){
-				that.addEndorsement(util.cleanupText($('#endorseComment').val()));
+				that.addEndorsement(util.cleanupText($('#devEndorseComment').val()));
 			});
 			
-			$('#endorseComment').on('change keyup paste',function(){
+			$('#devEndorseComment').on('change keyup paste',function(){
 					util.removeErrorMessage('endorseGadget');
 					if($(this).val()){
 						$('.add-endorse').attr('disabled',false);
@@ -373,7 +373,7 @@ var joinGadget = function(){
 	 *  needed interactions in the dialog.
 	 */ 
 	var createDialog = function(){
-		dialog = $( "<div id='joinDialog'></div>" )
+		dialog = $( "<div id='devJoinDialog'></div>" )
 				.html(
 					'<div class="mw-ui-vform">\
 					 	<div class="error grantsHide" localize="error-save">An error occured</div>\
@@ -383,7 +383,7 @@ var joinGadget = function(){
 						<option></option>\
 					</select>\
 					<div localize="message-description" class="messageDescription">Tell us how you would like to help</div>\
-					<textarea rows="5" cols="10" placeholder="Add your comment" id="joinComment" class="" localize="placeholder-comment"></textarea>\
+					<textarea rows="5" cols="10" placeholder="Add your comment" id="devJoinComment" class="" localize="placeholder-comment"></textarea>\
 					<span localize="message-signature" class="messageSignature">Your signature will be added automatically</span>\
 					<div class="gadgetControls">\
 						<a href="#" localize="button-cancel" class="mw-ui-button cancel mw-ui-quiet">Cancel</a>\
@@ -399,7 +399,7 @@ var joinGadget = function(){
 				resizable: false,
 				draggable: false,
 				close: function( event, ui ) {
-					$('#joinComment').val('');
+					$('#devJoinComment').val('');
 				}
 			});
 			$('.add-join').click(function(){
@@ -411,10 +411,10 @@ var joinGadget = function(){
 				var joinRole = $('.roleSelect').val().replace(/_/,' ');
 				joinRole=joinRole[0].toUpperCase()+joinRole.slice(1);
 				joinRole = "'''"+ joinRole + "'''" + " ";
-				that.addjoinment(joinRole+util.cleanupText($('#joinComment').val()));
+				that.addjoinment(joinRole+util.cleanupText($('#devJoinComment').val()));
 			});
 			
-			$('#joinComment').on('change keyup paste',function(){
+			$('#devJoinComment').on('change keyup paste',function(){
 				util.removeErrorMessage('joinGadget');
 					if($(this).val()){
 						$('.messageSignature').css('visibility','visible');
@@ -491,7 +491,7 @@ var joinGadget = function(){
 							*/
 							$('.roleSelect').on('change',function(){
 								util.removeErrorMessage('joinGadget');
-								if($(this).val() && $('#joinComment').val()){
+								if($(this).val() && $('#devJoinComment').val()){
 									$('.add-join').attr('disabled',false);
 								}
 								else{
@@ -668,6 +668,7 @@ mw.loader.using( ['jquery.ui.dialog', 'mediawiki.api', 'mediawiki.ui','jquery.ch
 							endorse.interfaceMessages = util.stripWhiteSpace(util.grantType(endorseInterfaceMessages));
 							
 							join.Dialog();
+							$('.wp-join-button').unbind();
 							$('.wp-join-button').click(function(e){
 													e.preventDefault();
 													join.Dialog();
@@ -676,6 +677,7 @@ mw.loader.using( ['jquery.ui.dialog', 'mediawiki.api', 'mediawiki.ui','jquery.ch
 								util.showFeedback(join.config, join.interfaceMessages);
 							}
 							endorse.Dialog();
+							$('.wp-endorse-button').unbind();
 							$('.wp-endorse-button').click(function(e){
 													e.preventDefault();
 													endorse.Dialog();
