@@ -648,10 +648,10 @@ mw.loader.using( ['jquery.ui.dialog', 'mediawiki.api', 'mediawiki.ui','jquery.ch
 					api.get({'action':'query','titles':interfaceMessagesFullPath+'|'+configFullPath,'format':'json'}).then(function(data){	
  
 						for(id in data.query.pages){
-							if (data.query.pages[id].title == util.interfaceMessagesPath && id == -1){
+							if (data.query.pages[id].title == util.interfaceMessagesPath+'/'+util.userLanguage() &&id == -1){
 								interfaceMessagesFullPath = util.interfaceMessagesPath+'/en';
 							}
-							if (data.query.pages[id].title == util.configPath && id == -1){
+							if (data.query.pages[id].title == util.configPath+'/'+util.contentLanguage() && id == -1){
 								configFullPath = util.configPath+'/en';
 							}
 						}
