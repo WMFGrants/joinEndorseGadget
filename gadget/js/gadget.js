@@ -281,7 +281,7 @@ var endorseGadget = function(){
 										'action' : 'edit',
 										'title' : mw.config.get('wgPageName'),
 										'text' : endorsementSection,
-										'summary' : 'Endorsement from ' + mw.user.getName(),
+										'summary' : 'Endorsed by ' + mw.user.getName(),
 										'section': sectionCount,
 										'watchlist':'watch',
 										'token' : mw.user.tokens.values.editToken
@@ -300,7 +300,7 @@ var endorseGadget = function(){
 							'action': 'edit',
 							'title': mw.config.get('wgPageName'),
 							'section': 'new',
-							'summary': sectionHeader + 'Adding my name to the participants section',
+							'summary': sectionHeader + ' Endorsed by ' + mw.user.getName(),
 							'sectiontitle': sectionHeader,
 							'text': $.trim(endorseComment),
 							'watchlist':'watch',
@@ -544,7 +544,7 @@ var joinGadget = function(){
 			'action' : 'edit',
 			'title' : mw.config.get('wgPageName'),
 			'text' : that.before + modifiedInfoBox + that.after,
-			'summary' : 'Adding my name to the infobox',
+			'summary' : 'Joined as ' + roleSelected,
 			'section': 0,
 			'watchlist':'watch',
 			'token' : mw.user.tokens.values.editToken
