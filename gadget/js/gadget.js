@@ -637,25 +637,15 @@ mw.loader.using( ['jquery.ui.dialog', 'mediawiki.api', 'mediawiki.ui','jquery.ch
 					var join = new joinGadget();		
 					var util = new gadgetUtilities();
 					var api = new mw.Api();
-					var interfaceMessagesFullPath = util.interfaceMessagesPath+'/'+util.userLanguage();
-					var configFullPath = util.configPath+'/'+util.contentLanguage();
+					var interfaceMessagesFullPath = util.interfaceMessagesPath;
+					var configFullPath = util.configPath;
 					
 					/*
 					 * To detect if we have the gadget translations and config in the desired languages.
 					 * Currently page language is English always. So the config returned is in en. The InterfaceMessages is
 					 * in the user's language
 					 */
-					api.get({'action':'query','titles':interfaceMessagesFullPath+'|'+configFullPath,'format':'json'}).then(function(data){	
- 
-						for(id in data.query.pages){
-							if (data.query.pages[id].title == util.interfaceMessagesPath+'/'+util.userLanguage() &&id == -1){
-								interfaceMessagesFullPath = util.interfaceMessagesPath+'/en';
-							}
-							if (data.query.pages[id].title == util.configPath+'/'+util.contentLanguage() && id == -1){
-								configFullPath = util.configPath+'/en';
-							}
-						}
- 
+					 
 						var interfaceMessagesUrl = 'https://meta.wikimedia.org/w/index.php?title='+interfaceMessagesFullPath+'&action=raw&ctype=text/javascript&smaxage=21600&maxage=86400';
 						var configUrl = 'https://meta.wikimedia.org/w/index.php?title='+configFullPath+'&action=raw&ctype=text/javascript&smaxage=21600&maxage=86400';
 						//Get the config for the detected language
@@ -693,7 +683,6 @@ mw.loader.using( ['jquery.ui.dialog', 'mediawiki.api', 'mediawiki.ui','jquery.ch
 								util.showFeedback(endorse.config, endorse.interfaceMessages);
 							}	
 						});
-					});
 				}
 				else{
 					$('.wp-join-button').hide();
