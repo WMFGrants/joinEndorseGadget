@@ -48,6 +48,11 @@ var endorseGadget = function(){
 			return endorseConfig['default'];
 		}
 	};
+	
+	//BUG: T173153. Check here: https://phabricator.wikimedia.org/T173153
+	if(navigator.userAgent.search('Firefox') >= 0)
+		$('.wp-join-button, .wp-endorse-button').css({'padding-left':'0.5em','padding-right':'0.5em'});
+	
 	//To add the endorsement thank you message
 	this.endorseFeedback = function(){
 		var li = $('#'+$.trim(grantType(endorseConfig)['section-header'])).parent().next().find('li').eq(-1);
